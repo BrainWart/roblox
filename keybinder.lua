@@ -434,10 +434,9 @@ do
 		local cancel_button = edit_frame.textbutton4
 		local remove_button = edit_frame.textbutton5
 		local select_key = edit_frame.textbutton2
-		local align_frame = edit_frame.aFrame
 		local text = {edit_title, edit_frame.label1, edit_frame.textbox1,
 			edit_frame.textbutton1, edit_frame.textbutton2, done_button, remove_button, cancel_button}
-		local bg = {edit_frame, edit_frame.aFrame, edit_frame.textbox1, edit_frame.textbutton1, edit_frame.textbutton2,
+		local bg = {edit_frame, edit_frame.textbox1, edit_frame.textbutton1, edit_frame.textbutton2,
 			done_button, remove_button, cancel_button}
 		
 		edit_frame.DragStopped:connect(function() gui.Edit.Position = edit_frame.Position end)
