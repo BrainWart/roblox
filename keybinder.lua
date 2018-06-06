@@ -190,6 +190,7 @@ _G.crash__()
 	AddBindEvent.Name = "AddKeyBind"
 	AddBindEvent.Event:connect(function(bind)
 		table.insert(bindings, bind)
+		if current_gui then current_gui:Refresh() end
 	end)
 
 	local disabled = false
