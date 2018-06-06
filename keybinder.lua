@@ -139,30 +139,13 @@ do -- Mouse connections
 			};
 		};
 		{
-			["name"] = "noclip";
-			["key"] = 0;
-			["on_down"] = false;
-			["errors"] = {};
-			["bind"] = function()
-if _G.noclip and _G.noclip.connected then
-	_G.noclip:disconnect()
-else
-	_G.noclip = game:GetService("RunService").Stepped:connect(function()
-		local head, torso = player.Character.Head, player.Character.Torso
-		head.CanCollide = false
-		torso.CanCollide = false
-	end)
-end
-			end;
-		};
-		{
 			["name"] = "hover";
 			["key"] = string.byte("h");
 			["on_down"] = false;
 			["errors"] = {};
 			["bind"] = function()
-if player.Character == nil or not player.Character:FindFirstChild("Torso") then return end
-local bp = player.Character.Torso:FindFirstChild("BodyPosition")
+if player.Character == nil or not (player.Character:FindFirstChild("Torso") or player.Character:FindFirstChild("HumanoidRootPart")) then return end
+local bp = (player.Character:FindFirstChild("Torso") or player.Character:FindFirstChild("HumanoidRootPart")):FindFirstChild("BodyPosition")
 if bp then
 	bp:Destroy()
 else
