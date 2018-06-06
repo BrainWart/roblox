@@ -428,16 +428,14 @@ do
 		local edit_frame = g.Edit
 		local edit_transparencyHandler = edit_frame.Transparency_Handler
 		local edit_title = edit_frame.Title
-		local bind_area = edit_frame.textbox2
 		local name_area = edit_frame.textbox1
 		local onkeydown = edit_frame.textbutton1
 		local done_button = edit_frame.textbutton3
 		local cancel_button = edit_frame.textbutton4
 		local remove_button = edit_frame.textbutton5
 		local select_key = edit_frame.textbutton2
-		local bind_area_label = edit_frame.label2
 		local align_frame = edit_frame.aFrame
-		local text = {edit_title, edit_frame.label1, edit_frame.label2, edit_frame.textbox1, edit_frame.textbox2,
+		local text = {edit_title, edit_frame.label1, edit_frame.textbox1,
 			edit_frame.textbutton1, edit_frame.textbutton2, done_button, remove_button, cancel_button}
 		local bg = {edit_frame, edit_frame.aFrame, edit_frame.textbox1, edit_frame.textbutton1, edit_frame.textbutton2,
 			done_button, remove_button, cancel_button}
@@ -552,8 +550,7 @@ do
 				local key_text = tostring(key_char:match("%a") and ("'%s'"):format(key_char) or tab.key)
 				if key_text == "0" then key_text = "none" end
 				
-				bind_area.Text = current_bind.bind or ""
-					select_key.Text = ("Current: %s"):format(key_text)
+				select_key.Text = ("Current: %s"):format(key_text)
 				onkeydown.Text = current_bind.on_down and "Key Down" or "Key Up"
 			end
 		end
