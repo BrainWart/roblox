@@ -297,7 +297,7 @@ do
 		local frame = Instance.new("Frame", gui)
 			frame.Name = "Edit"
 			frame.Position = UDim2.new(0.5,-100,0.5,-75)
-			frame.Size = UDim2.new(0,200,0,175)
+			frame.Size = UDim2.new(0,200,0,85)
 			frame.BackgroundColor3 = Color3.new(0.5,0.5,0.5)
 			frame.BackgroundTransparency = 0.4
 			frame.BorderColor3 = Color3.new(0.1,0.1,0.1)
@@ -366,39 +366,6 @@ do
 			textbutton2.BackgroundTransparency = 0.4
 			textbutton2.TextColor3 = Color3.new(0.1,0.1,0.1)
 			textbutton2.TextTransparency = 0.4
-		
-		local label2 = Instance.new("TextLabel", frame)
-			label2.Name = "label2"
-			label2.Text = "Function:"
-			label2.Font = "Arial"
-			label2.FontSize = 5
-			label2.BorderSizePixel = 0
-			label2.Position = UDim2.new(0,5,0,73)
-			label2.TextXAlignment = "Left"
-			label2.TextColor3 = Color3.new(0.1,0.1,0.1)
-			label2.TextTransparency = 0.4
-		
-		local alignmentFrame = Instance.new("Frame", frame)
-			alignmentFrame.Name = "aFrame"
-			alignmentFrame.Position = UDim2.new(0,5,0,80)
-			alignmentFrame.Size = UDim2.new(0,190,0,65)
-			alignmentFrame.BackgroundColor3 = Color3.new(0.5,0.5,0.5)
-			alignmentFrame.BackgroundTransparency = 0.4
-		
-		local textbox2 = Instance.new("TextBox", frame)
-			textbox2.Name = "textbox2"
-			textbox2.Text = ""
-			textbox2.Font = "Arial"
-			textbox2.FontSize = 5
-			textbox2.Position = UDim2.new(0,10,0,85)
-			textbox2.Size = UDim2.new(0,180,0,60)
-			textbox2.MultiLine = true
-			textbox2.TextWrapped = true
-			textbox2.TextXAlignment = "Left"
-			textbox2.TextYAlignment = "Top"
-			textbox2.BackgroundTransparency = 1
-			textbox2.TextColor3 = Color3.new(0.1,0.1,0.1)
-			textbox2.TextTransparency = 0.4
 		
 		local textbutton3 = Instance.new("TextButton", frame)
 			textbutton3.Name = "textbutton3"
