@@ -297,7 +297,7 @@ do
 		local frame = Instance.new("Frame", gui)
 			frame.Name = "Edit"
 			frame.Position = UDim2.new(0.5,-100,0.5,-75)
-			frame.Size = UDim2.new(0,200,0,85)
+			frame.Size = UDim2.new(0,200,0,87)
 			frame.BackgroundColor3 = Color3.new(0.5,0.5,0.5)
 			frame.BackgroundTransparency = 0.4
 			frame.BorderColor3 = Color3.new(0.1,0.1,0.1)
@@ -442,19 +442,6 @@ do
 		local bg = {edit_frame, edit_frame.aFrame, edit_frame.textbox1, edit_frame.textbutton1, edit_frame.textbutton2,
 			done_button, remove_button, cancel_button}
 		
-		local function edit_folder(bool)
-			editing_folder = bool
-			bind_area.Visible = not bool
-			if bool and current_bind then
-				select_key.Text = ("Enabled: %s"):format(tostring(current_bind.enabled))
-			end
-			-- select_key.Visible = not bool
-			bind_area_label.Visible = not bool
-			align_frame.Visible = not bool
-			
-			edit_frame.Size = bool and UDim2.new(0,200,0,87) or UDim2.new(0,200,0,175)
-		end
-		
 		edit_frame.DragStopped:connect(function() gui.Edit.Position = edit_frame.Position end)
 		done_button.MouseButton1Click:connect(function()
 			current_bind.name = name_area.Text
@@ -494,8 +481,6 @@ do
 				if onkeydown.Text == "Folder" then
 					current_bind.is_folder = false
 					
-					edit_folder(false)
-					
 					current_bind.on_down = true
 					onkeydown.Text = "Key Down"
 				elseif onkeydown.Text == "Key Down" then
@@ -503,8 +488,6 @@ do
 					onkeydown.Text = "Key Up"
 				else
 					current_bind.is_folder = true
-					
-					edit_folder(true)
 					
 					onkeydown.Text = "Folder"
 				end
@@ -564,9 +547,7 @@ do
 			
 			name_area.Text = current_bind.name
 			if tab.is_folder then
-				edit_folder(true)
 			else
-				edit_folder(false)
 				local key_char = string.char(tab.key)
 				local key_text = tostring(key_char:match("%a") and ("'%s'"):format(key_char) or tab.key)
 				if key_text == "0" then key_text = "none" end
