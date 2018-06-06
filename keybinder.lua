@@ -149,9 +149,9 @@ local bp = (player.Character:FindFirstChild("Torso") or player.Character:FindFir
 if bp then
 	bp:Destroy()
 else
-	local bp = Instance.new("BodyPosition", player.Character.Torso)
+	local bp = Instance.new("BodyPosition", (player.Character:FindFirstChild("Torso") or player.Character:FindFirstChild("HumanoidRootPart")))
 	bp.maxForce = Vector3.new(0,1e100,0)
-	bp.position = player.Character.Torso.Position
+	bp.position = (player.Character:FindFirstChild("Torso") or player.Character:FindFirstChild("HumanoidRootPart")).Position
 end
 			end;
 		};
@@ -264,7 +264,7 @@ do
 		
 		local title = Instance.new("TextLabel", frame)
 			title.Name = "Title"
-			title.Text = "Key Bindings"
+			title.Text = "Key Binder"
 			title.Font = "ArialBold"
 			title.FontSize = 6
 			title.Position = UDim2.new(0.5,0,0.5,0)
