@@ -100,38 +100,42 @@ do -- Mouse connections
 			["name"] = "zoom";
 			["is_folder"] = true;
 			["enabled"] = true;
-			{
-				["name"] = "zoom out";
-				["key"] = 50;
-				["on_down"] = false;
-				["errors"] = {};
-				["bind"] = function() Workspace.CurrentCamera.FieldOfView = 70 end;
-			};
-			{
-				["name"] = "zoom in";
-				["key"] = 50;
-				["on_down"] = true;
-				["errors"] = {};
-				["bind"] = function() Workspace.CurrentCamera.FieldOfView = 20 end;
+			["bind"] = {
+				{
+					["name"] = "zoom out";
+					["key"] = 50;
+					["on_down"] = false;
+					["errors"] = {};
+					["bind"] = function() Workspace.CurrentCamera.FieldOfView = 70 end;
+				};
+				{
+					["name"] = "zoom in";
+					["key"] = 50;
+					["on_down"] = true;
+					["errors"] = {};
+					["bind"] = function() Workspace.CurrentCamera.FieldOfView = 20 end;
+				};
 			};
 		};
 		{
 			["name"] = "run";
 			["is_folder"] = true;
 			["enabled"] = true;
-			{
-				["name"] = "run";
-				["key"] = 48;
-				["on_down"] = true;
-				["errors"] = {};
-				["bind"] = function() player.Character.Humanoid.WalkSpeed = 32 end;
-			};
-			{
-				["name"] = "walk";
-				["key"] = 48;
-				["on_down"] = false;
-				["errors"] = {};
-				["bind"] = function() player.Character.Humanoid.WalkSpeed = 16 end;
+			["bind"] = {
+				{
+					["name"] = "run";
+					["key"] = 48;
+					["on_down"] = true;
+					["errors"] = {};
+					["bind"] = function() player.Character.Humanoid.WalkSpeed = 32 end;
+				};
+				{
+					["name"] = "walk";
+					["key"] = 48;
+					["on_down"] = false;
+					["errors"] = {};
+					["bind"] = function() player.Character.Humanoid.WalkSpeed = 16 end;
+				};
 			};
 		};
 		{
@@ -199,6 +203,12 @@ _G.crash__()
 		};
 	}
 
+	local AddBindEvent = Instance.new("BindableEvent", game.Players.LocalPlayer)
+	AddBindEvent.Name = "AddKeyBind"
+	AddBindEvent.Event:connect(function(bind)
+		table.insert(bindings, bind)
+	end)
+
 	local disabled = false
 	DisableKeyEvents = function(bool)
 		disabled = bool
@@ -213,7 +223,7 @@ _G.crash__()
 				local tab = bindings_table[i]
 				
 				if tab.is_folder and tab.enabled then
-					check_bindings(tab)
+					check_bindings(tab.bind)
 				elseif tab.key == key and not tab.on_down then
 					local ran, err = runSnippet(tab.bind)
 					if not ran then
@@ -234,7 +244,7 @@ _G.crash__()
 				local tab = bindings_table[i]
 				
 				if tab.is_folder and tab.enabled then
-					check_bindings(tab)
+					check_bindings(tab.bind)
 				elseif tab.key == key and tab.on_down then
 					local ran, err = runSnippet(tab.bind)
 					if not ran then
@@ -443,7 +453,6 @@ do
 		done_button.MouseButton1Click:connect(function()
 			current_bind.name = name_area.Text
 			current_bind.errors = {}
-			current_bind.bind = bind_area.Text
 			current_bind = nil
 			
 			refresh()
@@ -635,7 +644,7 @@ do
 					local tab = binding_table[i]
 					
 					if tab.is_folder then
-						local folder_frame = make_buttons(tab)
+						local folder_frame = make_buttons(tab.bind)
 							folder_frame.Visible = false
 						
 						local button = bindButton:Clone()
