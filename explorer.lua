@@ -778,7 +778,7 @@ do -- property editor events
 					table.insert(values, tonumber(m) or m)
 				end
 				
-				if createTab then
+				if createTab["new"] then
 					obj[prop] = createTab.new(unpack(values))
 				else
 					obj[prop] = tonumber(val) or val
