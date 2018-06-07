@@ -768,7 +768,7 @@ do -- property editor events
 	apply.MouseButton1Down:connect(errorCatcher.checker(function()
 		local ran, err = pcall(function(obj, prop, val)
 			if prop == "function" then
-				obj[val](val)
+				obj[val](obj)
 			elseif prop == "insert" then
 				Instance.new(val, obj)
 			else
