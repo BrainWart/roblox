@@ -616,7 +616,7 @@ function attachButtons(current)
 				contextmenu.Visible = true
 				contextmenu.Position = UDim2.new(
 					0,x - editor.AbsolutePosition.X,
-					0,y - editor.AbsolutePosition.Y)
+					0,y - editor.AbsolutePosition.Y - 40)
 			end,"b-edit"))
 			
 			count = count + 1
