@@ -587,17 +587,7 @@ function attachButtons(current)
 				b.Text = "game"
 			else
 				local partialName = false
-				b.Text = nameBox.Text:gsub("!%((.-)%)!", function(val)
-					local f = loadstring("return tostring(" .. val .. ")")
-					if f then
-						getfenv(f)["this"] = a
-						local r, e = pcall(f)
-						if r then
-							partialName = true
-							return e
-						end
-					end
-				end):gsub("%$%((.-)%)%$", function(val)
+				b.Text = nameBox.Text:gsub("%$%((.-)%)%$", function(val)
 					for prop in val:gmatch("([^%/]+)") do
 						local r, e = pcall(function() return tostring(a[prop]) end)
 						if r then
@@ -778,15 +768,21 @@ do -- property editor events
 	apply.MouseButton1Down:connect(errorCatcher.checker(function()
 		local ran, err = pcall(function(obj, prop, val)
 			if prop == "function" then
-				local f, e = assert(loadstring("this:" .. val))
-				getfenv(f)["this"] = obj
-				f()
+				obj[val](val)
 			elseif prop == "insert" then
 				Instance.new(val, obj)
 			else
-				local f, e = assert(loadstring("return " .. val))
-				getfenv(f)["this"] = obj
-				obj[prop] = f()
+				local createTab = getfenv()[typeof(obj[prop])];
+				local values = {}
+				for m in val:gmatch("([^ ]+)") do
+					table.insert(values, tonumber(m) or m)
+				end
+				
+				if createTab then
+					obj[prop] = createTab.new(unpack(values))
+				else
+					obj[prop] = tonumber(val) or val
+				end
 			end
 		end, contextObject, propertyBox.Text, valueBox.Text)
 		if not ran then
