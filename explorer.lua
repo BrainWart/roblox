@@ -66,8 +66,8 @@ local GameEditor = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
 	GameEditor.Name = "GameEditor"
 
 pcall(function()
-	GameEditor.Parent = game.CoreGui
 	script.Parent = nil
+	GameEditor.Parent = game.CoreGui
 	print(game.Players.LocalPlayer.Name .. " has a higher context!")
 end)
 
@@ -778,7 +778,7 @@ do -- property editor events
 					table.insert(values, tonumber(m) or m)
 				end
 				
-				if createTab["new"] then
+				if createTab and createTab["new"] then
 					obj[prop] = createTab.new(unpack(values))
 				else
 					obj[prop] = tonumber(val) or val
