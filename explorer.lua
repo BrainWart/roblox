@@ -7,6 +7,8 @@
 -- CAM - 05-27-2013 - Add scroll wheel support : [[[ScrollWheel]]]
 ]==]--
 
+assert(script.className == "LocalScript", "Script must be local!")
+
 local errorCatcher = {}
 do
 	function _G.getErrors()
